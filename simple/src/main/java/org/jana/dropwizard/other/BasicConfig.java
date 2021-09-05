@@ -1,4 +1,4 @@
-package org.jana.dropwizard;
+package org.jana.dropwizard.other;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

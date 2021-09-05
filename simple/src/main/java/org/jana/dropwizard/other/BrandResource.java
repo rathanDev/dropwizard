@@ -1,6 +1,7 @@
-package org.jana.dropwizard;
+package org.jana.dropwizard.other;
 
-import com.codahale.metrics.annotation.Timed;
+import org.jana.dropwizard.other.Brand;
+import org.jana.dropwizard.other.BrandRepo;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,17 +12,15 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 public class BrandResource {
 
-    private final int defaultSize;
     private final BrandRepo brandRepository;
 
-    public BrandResource(int defaultSize, BrandRepo brandRepository) {
-        this.defaultSize = defaultSize;
+    public BrandResource(BrandRepo brandRepository) {
         this.brandRepository = brandRepository;
     }
 
     @GET
     public List<Brand> getBrands(@QueryParam("size") Optional<Integer> size) {
-        return brandRepository.findAll(size.orElse(defaultSize));
+        return brandRepository.findAll(size.orElse(100));
     }
 
     @GET

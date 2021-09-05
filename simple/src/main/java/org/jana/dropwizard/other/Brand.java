@@ -1,4 +1,4 @@
-package org.jana.dropwizard;
+package org.jana.dropwizard.other;
 
 public class Brand {
     private final Long id;

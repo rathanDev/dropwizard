@@ -42,7 +42,7 @@
   </build>
   <properties>
     <maven.compiler.target>11</maven.compiler.target>
-    <dropwizard.version>2.0.0</dropwizard.version>
+    <dropwizard.version>2.1.0-SNAPSHOT</dropwizard.version>
     <maven.compiler.source>11</maven.compiler.source>
   </properties>
 </project>

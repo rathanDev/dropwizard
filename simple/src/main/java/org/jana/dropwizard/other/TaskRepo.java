@@ -1,4 +1,6 @@
-package org.jana.dropwizard;
+package org.jana.dropwizard.other;
+
+import org.jana.dropwizard.other.TaskDomain;
 
 import java.util.ArrayList;
 import java.util.List;
