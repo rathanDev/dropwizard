@@ -10,6 +10,7 @@ import java.util.Optional;
 @Path("/brands")
 @Produces(MediaType.APPLICATION_JSON)
 public class BrandResource {
+
     private final int defaultSize;
     private final BrandRepo brandRepository;
 
@@ -17,12 +18,6 @@ public class BrandResource {
         this.defaultSize = defaultSize;
         this.brandRepository = brandRepository;
     }
-
-//    @GET
-//    @Timed
-//    public Brand sayHello(@QueryParam("name") Optional<String> name) {
-//        return new Brand(300L, "threeHundred");
-//    }
 
     @GET
     public List<Brand> getBrands(@QueryParam("size") Optional<Integer> size) {
