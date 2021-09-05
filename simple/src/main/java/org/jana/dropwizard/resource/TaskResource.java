@@ -1,18 +1,18 @@
 package org.jana.dropwizard.resource;
 
 import io.dropwizard.hibernate.UnitOfWork;
-import org.jana.dropwizard.dao.TaskDao;
 import org.jana.dropwizard.core.Task;
+import org.jana.dropwizard.dao.TaskDao;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/tasks")
+@Path("/task")
 @Produces(MediaType.APPLICATION_JSON)
 public class TaskResource {
 
-    //    private final TaskRepo taskRepo;
     private final TaskDao taskDao;
 
     public TaskResource(TaskDao taskDao) {
@@ -20,6 +20,7 @@ public class TaskResource {
     }
 
     @GET
+    @UnitOfWork
     public List<Task> getAllTasks() {
         return taskDao.findAll();
     }
@@ -34,9 +35,10 @@ public class TaskResource {
     }
 
     @POST
-    public Task saveTask(Task task) {
-        Task saved = taskDao.create(task);
-        return saved;
+    @UnitOfWork
+    public Task saveTask(@Valid Task task) {
+        return taskDao.create(task);
+        // return saved;
     }
 
 }

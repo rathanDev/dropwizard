@@ -1,6 +1,7 @@
 package org.jana.dropwizard.core;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "task_tb")
@@ -10,20 +11,12 @@ import javax.persistence.*;
                 query = "select t from Task t"
         )
 })
-/*
-,
-        @NamedQuery(
-                name = "org.jana.dropwizard.core.Task.findByDesc",
-                query = "select t from Task t " +
-                        "where t.task_desc like :desc ")
-* */
-
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "task_id")
-    private int taskId;
+    // @Column(name = "task_id")
+    private int id;
 
     @Column(name = "task_desc")
     private String taskDesc;
@@ -34,18 +27,18 @@ public class Task {
     public Task() {
     }
 
-    public Task(int taskId, String taskDesc, String taskDate) {
-        this.taskId = taskId;
+    public Task(int id, String taskDesc, String taskDate) {
+        this.id = id;
         this.taskDesc = taskDesc;
         this.taskDate = taskDate;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public int getId() {
+        return id;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTaskDesc() {
@@ -62,6 +55,28 @@ public class Task {
 
     public void setTaskDate(String taskDate) {
         this.taskDate = taskDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task task = (Task) o;
+
+        return id == task.id &&
+                Objects.equals(taskDesc, task.taskDesc) &&
+                Objects.equals(taskDate, task.taskDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, taskDesc, taskDate);
     }
 
 }

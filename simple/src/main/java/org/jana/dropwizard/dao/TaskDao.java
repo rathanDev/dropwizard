@@ -4,7 +4,6 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 import org.jana.dropwizard.core.Task;
 
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +14,7 @@ public class TaskDao extends AbstractDAO<Task> {
     }
 
     public List<Task> findAll() {
-        return list((CriteriaQuery<Task>) namedQuery("org.jana.dropwizard.core.Task.findAll"));
+        return list(namedTypedQuery("org.jana.dropwizard.core.Task.findAll"));
     }
 
     public Optional<Task> findById(int id) {
@@ -25,7 +24,6 @@ public class TaskDao extends AbstractDAO<Task> {
     public Task create(Task task) {
         return persist(task);
     }
-
 
 }
 

@@ -48,6 +48,15 @@ primary key(task_id)
 insert into task_tb values (1, 'Become React Guru', '2021-01-01'), (2, 'Learn Dropwizard', '2021-02-01');
 
 select * from task_tb;
+
+! java.sql.SQLException: Field 'task_id' doesn't have a default value
+
+! Causing: javax.persistence.OptimisticLockException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.Task#8]
+
+org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.Task#8]
+
+ALTER TABLE task_tb RENAME COLUMN task_id TO id;
+
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
