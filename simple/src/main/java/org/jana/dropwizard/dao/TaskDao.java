@@ -21,7 +21,7 @@ public class TaskDao extends AbstractDAO<Task> {
         return Optional.ofNullable(get(id));
     }
 
-    public Task create(Task task) {
+    public Task saveOrUpdate(Task task) {
         return persist(task);
     }
 

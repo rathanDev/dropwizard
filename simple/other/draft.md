@@ -57,6 +57,9 @@ org.hibernate.StaleObjectStateException: Row was updated or deleted by another t
 
 ALTER TABLE task_tb RENAME COLUMN task_id TO id;
 
+WARN  [2021-09-05 10:22:39,589] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: SQL Error: 1064, SQLState: 42000
+ERROR [2021-09-05 10:22:39,590] org.hibernate.engine.jdbc.spi.SqlExceptionHelper: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc='task4', status='COMPLETED' where id=4' at line 1
+
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------

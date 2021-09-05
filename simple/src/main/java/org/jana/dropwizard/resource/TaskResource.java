@@ -36,9 +36,26 @@ public class TaskResource {
 
     @POST
     @UnitOfWork
-    public Task saveTask(@Valid Task task) {
-        return taskDao.create(task);
+    public Task create(@Valid Task task) {
+        return taskDao.saveOrUpdate(task);
         // return saved;
+    }
+
+    @POST
+    @Path("/{id}")
+    @UnitOfWork
+    public Task update(@PathParam("id") int id, Task task) {
+        Task record = taskDao.findById(id).orElseThrow(RuntimeException::new);
+        if (task.getDesc() != null && !task.getDesc().isBlank()) {
+            record.setDesc(task.getDesc());
+        }
+        if (task.getDate() != null && !task.getDate().isBlank()) {
+            record.setDate(task.getDate());
+        }
+        if (task.getStatus() != null && !task.getStatus().isBlank()) {
+            record.setStatus(task.getStatus());
+        }
+        return taskDao.saveOrUpdate(record);
     }
 
 }

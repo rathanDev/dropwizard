@@ -18,19 +18,23 @@ public class Task {
     // @Column(name = "task_id")
     private int id;
 
-    @Column(name = "task_desc")
-    private String taskDesc;
+    @Column(name = "desc")
+    private String desc;
 
-    @Column(name = "task_date")
-    private String taskDate;
+    @Column(name = "date")
+    private String date;
+
+    @Column(name = "status")
+    private String status;
 
     public Task() {
     }
 
-    public Task(int id, String taskDesc, String taskDate) {
+    public Task(int id, String desc, String date, String status) {
         this.id = id;
-        this.taskDesc = taskDesc;
-        this.taskDate = taskDate;
+        this.desc = desc;
+        this.date = date;
+        this.status = status;
     }
 
     public int getId() {
@@ -41,20 +45,28 @@ public class Task {
         this.id = id;
     }
 
-    public String getTaskDesc() {
-        return taskDesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setTaskDesc(String taskDesc) {
-        this.taskDesc = taskDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-    public String getTaskDate() {
-        return taskDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setTaskDate(String taskDate) {
-        this.taskDate = taskDate;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -70,13 +82,14 @@ public class Task {
         Task task = (Task) o;
 
         return id == task.id &&
-                Objects.equals(taskDesc, task.taskDesc) &&
-                Objects.equals(taskDate, task.taskDate);
+                Objects.equals(desc, task.desc) &&
+                Objects.equals(date, task.date) &&
+                Objects.equals(status, task.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, taskDesc, taskDate);
+        return Objects.hash(id, desc, date, status);
     }
 
 }
