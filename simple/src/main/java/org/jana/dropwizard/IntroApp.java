@@ -4,20 +4,18 @@ import io.dropwizard.Application;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-
-import java.util.Arrays;
-import java.util.List;
-
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
+import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.List;
 
 public class IntroApp extends Application<BasicConfig> {
 
     public static void main(String[] args) throws Exception {
-        new IntroApp().run("server", "intro-config.yml");
+        new IntroApp().run("server", "config.yml");
     }
 
     @Override
@@ -35,8 +33,13 @@ public class IntroApp extends Application<BasicConfig> {
         int defaultSize = config.getDefaultSize();
         BrandRepo brandRepository = new BrandRepo(initBrands());
         BrandResource brandResource = new BrandResource(defaultSize, brandRepository);
-        env.healthChecks().register("application", new AppHealthCheck());
         env.jersey().register(brandResource);
+
+        TaskRepo taskRepo = new TaskRepo();
+        TaskResource taskResource = new TaskResource(taskRepo);
+        env.jersey().register(taskResource);
+
+        env.healthChecks().register("application", new AppHealthCheck());
     }
 
     private List<Brand> initBrands() {
