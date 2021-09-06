@@ -4,7 +4,6 @@ import io.dropwizard.hibernate.UnitOfWork;
 import org.jana.dropwizard.core.Task;
 import org.jana.dropwizard.dao.TaskDao;
 
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -35,8 +34,9 @@ public class TaskResource {
     }
 
     @POST
-    @UnitOfWork
-    public Task create(@Valid Task task) {
+    @UnitOfWork // @Valid
+    public Task create() {
+        Task task = new Task(8, "desc8", "2021-01-08", "PENDING");
         return taskDao.saveOrUpdate(task);
         // return saved;
     }
@@ -46,14 +46,14 @@ public class TaskResource {
     @UnitOfWork
     public Task update(@PathParam("id") int id, Task task) {
         Task record = taskDao.findById(id).orElseThrow(RuntimeException::new);
-        if (task.getDesc() != null && !task.getDesc().isBlank()) {
-            record.setDesc(task.getDesc());
+        if (task.getTaskDesc() != null && !task.getTaskDesc().isBlank()) {
+            record.setTaskDesc(task.getTaskDesc());
         }
-        if (task.getDate() != null && !task.getDate().isBlank()) {
-            record.setDate(task.getDate());
+        if (task.getTaskDate() != null && !task.getTaskDate().isBlank()) {
+            record.setTaskDate(task.getTaskDate());
         }
-        if (task.getStatus() != null && !task.getStatus().isBlank()) {
-            record.setStatus(task.getStatus());
+        if (task.getTaskStatus() != null && !task.getTaskStatus().isBlank()) {
+            record.setTaskStatus(task.getTaskStatus());
         }
         return taskDao.saveOrUpdate(record);
     }

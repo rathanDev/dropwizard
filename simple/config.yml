@@ -20,4 +20,31 @@ database:
 #    charSet: utf8mb4
 
 
-#  CREATE DATABASE `testdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+#database:
+#  # the name of your JDBC driver
+#  driverClass: org.h2.Driver
+#  # the username
+#  user: sa
+#  # the password
+#  password: sa
+#  # the JDBC URL
+#  url: jdbc:h2:~/test
+#  properties:
+#    hibernate.dialect: org.hibernate.dialect.H2Dialect
+#    h2:
+#      console:
+#        enabled: true
+#        path: /h2-console
+
+
+# Logging settings.
+logging:
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: DEBUG
+  # Logger-specific levels.
+  loggers:
+    # Sets the level for 'com.example.app' to DEBUG.
+    org.jana.dropwizard: DEBUG
+    # Redirects SQL logs to a separate file
+    org.hibernate.SQL:
+      level: DEBUG

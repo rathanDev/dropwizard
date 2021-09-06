@@ -13,28 +13,31 @@ import java.util.Objects;
 })
 public class Task {
 
+    private static final long serialVersionUID = -1798070786993154676L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // @Column(name = "task_id")
+    @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "taskDesc", unique = false, nullable = true, length = 100)
+    private String taskDesc;
 
-    @Column(name = "date")
-    private String date;
+    @Column(name = "taskDate")
+    private String taskDate;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "taskStatus")
+    private String taskStatus;
 
     public Task() {
     }
 
-    public Task(int id, String desc, String date, String status) {
+    public Task(int id, String taskDesc, String taskDate, String taskStatus) {
         this.id = id;
-        this.desc = desc;
-        this.date = date;
-        this.status = status;
+        this.taskDesc = taskDesc;
+        this.taskDate = taskDate;
+        this.taskStatus = taskStatus;
     }
 
     public int getId() {
@@ -45,28 +48,28 @@ public class Task {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getTaskDesc() {
+        return taskDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setTaskDesc(String taskDesc) {
+        this.taskDesc = taskDesc;
     }
 
-    public String getDate() {
-        return date;
+    public String getTaskDate() {
+        return taskDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTaskDate(String taskDate) {
+        this.taskDate = taskDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getTaskStatus() {
+        return taskStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     @Override
@@ -82,14 +85,14 @@ public class Task {
         Task task = (Task) o;
 
         return id == task.id &&
-                Objects.equals(desc, task.desc) &&
-                Objects.equals(date, task.date) &&
-                Objects.equals(status, task.status);
+                Objects.equals(taskDesc, task.taskDesc) &&
+                Objects.equals(taskDate, task.taskDate) &&
+                Objects.equals(taskStatus, task.taskStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, desc, date, status);
+        return Objects.hash(id, taskDesc, taskDate, taskStatus);
     }
 
 }
