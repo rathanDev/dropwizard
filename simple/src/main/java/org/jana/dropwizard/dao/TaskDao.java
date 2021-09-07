@@ -2,7 +2,7 @@ package org.jana.dropwizard.dao;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
-import org.jana.dropwizard.core.TaskEntity;
+import org.jana.dropwizard.entity.TaskEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class TaskDao extends AbstractDAO<TaskEntity> {
         return Optional.ofNullable(get(id));
     }
 
-    public TaskEntity create(TaskEntity taskEntity) {
+    public TaskEntity saveOrUpdate(TaskEntity taskEntity) {
         return persist(taskEntity);
     }
 

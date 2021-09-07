@@ -6,7 +6,7 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
-import org.jana.dropwizard.core.TaskEntity;
+import org.jana.dropwizard.entity.TaskEntity;
 import org.jana.dropwizard.dao.TaskDao;
 import org.jana.dropwizard.resource.TaskResource;
 

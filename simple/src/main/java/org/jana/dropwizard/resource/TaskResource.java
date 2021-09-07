@@ -1,12 +1,15 @@
 package org.jana.dropwizard.resource;
 
 import io.dropwizard.hibernate.UnitOfWork;
-import org.jana.dropwizard.core.TaskEntity;
 import org.jana.dropwizard.dao.TaskDao;
+import org.jana.dropwizard.domain.TaskDomain;
+import org.jana.dropwizard.domain.TaskStatus;
+import org.jana.dropwizard.entity.TaskEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.UUID;
 
 @Path("/task")
 @Produces(MediaType.APPLICATION_JSON)
@@ -35,26 +38,33 @@ public class TaskResource {
 
     @POST
     @UnitOfWork
-    public int create(TaskEntity taskEntity) {
-        return taskDao.create(taskEntity).getId();
+    public String create(TaskDomain req) {
+        TaskEntity entity = new TaskEntity(
+                UUID.randomUUID().toString(),
+                req.getTaskDesc(),
+                req.getTaskDate(),
+                TaskStatus.PENDING.toString()
+        );
+        return taskDao.saveOrUpdate(entity).getId();
     }
 
-//    @POST
-//    @Path("/{id}")
-//    @UnitOfWork
-//    public Task update(@PathParam("id") int id, Task task) {
-//        Task record = taskDao.findById(id).orElseThrow(RuntimeException::new);
-//        if (task.getTaskDesc() != null && !task.getTaskDesc().isEmpty()) {
-//            record.setTaskDesc(task.getTaskDesc());
-//        }
-//        if (task.getTaskDate() != null && !task.getTaskDate().isEmpty()) {
-//            record.setTaskDate(task.getTaskDate());
-//        }
-//        if (task.getTaskStatus() != null && !task.getTaskStatus().isEmpty()) {
-//            record.setTaskStatus(task.getTaskStatus());
-//        }
-//        return taskDao.saveOrUpdate(record);
-//    }
+    @POST
+    @Path("/{id}")
+    @UnitOfWork
+    public String update(@PathParam("id") int id, TaskDomain req) {
+        TaskEntity entity = taskDao.findById(id).orElseThrow(RuntimeException::new);
+        if (req.getTaskDesc() != null && !req.getTaskDesc().trim().isEmpty()) {
+            entity.setTaskDesc(req.getTaskDesc());
+        }
+        if (req.getTaskDate() != null) {
+            entity.setTaskDate(req.getTaskDate());
+        }
+        if (req.getTaskStatus() != null) {
+            entity.setTaskStatus(req.getTaskStatus().toString());
+        }
+        taskDao.saveOrUpdate(entity);
+        return entity.getId();
+    }
 
 }
 
