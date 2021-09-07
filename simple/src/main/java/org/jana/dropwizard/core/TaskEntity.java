@@ -1,20 +1,17 @@
 package org.jana.dropwizard.core;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "task_tb")
 @NamedQueries({
         @NamedQuery(
-                name = "org.jana.dropwizard.core.Task.findAll",
-                query = "select t from Task t"
+                name = "org.jana.dropwizard.core.TaskEntity.findAll",
+                query = "select t from TaskEntity t"
         )
 })
-public class Task implements Serializable {
-
-    private static final long serialVersionUID = -1798070786993154676L;
+public class TaskEntity {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
@@ -29,10 +26,10 @@ public class Task implements Serializable {
     @Column(name = "taskStatus", unique = false, nullable = true, length = 20)
     private String taskStatus;
 
-    public Task() {
+    public TaskEntity() {
     }
 
-    public Task(int id, String taskDesc, String taskDate, String taskStatus) {
+    public TaskEntity(int id, String taskDesc, String taskDate, String taskStatus) {
         this.id = id;
         this.taskDesc = taskDesc;
         this.taskDate = taskDate;
@@ -77,13 +74,13 @@ public class Task implements Serializable {
             return true;
         }
 
-        if (!(o instanceof Task)) {
+        if (!(o instanceof TaskEntity)) {
             return false;
         }
 
-        Task task = (Task) o;
+        TaskEntity taskEntity = (TaskEntity) o;
 
-        return id == task.id;
+        return id == taskEntity.id;
     }
 
     @Override

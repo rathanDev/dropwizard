@@ -51,9 +51,9 @@ select * from task_tb;
 
 ! java.sql.SQLException: Field 'task_id' doesn't have a default value
 
-! Causing: javax.persistence.OptimisticLockException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.Task#8]
+! Causing: javax.persistence.OptimisticLockException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.TaskEntity#8]
 
-org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.Task#8]
+org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.TaskEntity#8]
 
 ALTER TABLE task_tb RENAME COLUMN task_id TO id;
 
@@ -65,7 +65,7 @@ ERROR [2021-09-05 23:49:06,737] io.dropwizard.jersey.errors.LoggingExceptionMapp
 ! java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc='task8', status='PENDING' where id=8' at line 1
 
 ERROR [2021-09-05 23:55:28,245] io.dropwizard.jersey.errors.LoggingExceptionMapper: Error handling a request: 415a2cd4dc2a0811
-! org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.Task#8]
+! org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.TaskEntity#8]
 
 Dropwizard save not working
 DEBUG [2021-09-06 14:36:36,106] org.eclipse.jetty.io.ManagedSelector: Selector sun.nio.ch.WindowsSelectorImpl@55a54d83 woken with none selected
@@ -82,7 +82,7 @@ DEBUG [2021-09-06 14:36:36,106] org.eclipse.jetty.io.WriteFlusher: ignored: Writ
 ! at java.lang.Thread.run(Thread.java:748)
 
 ERROR [2021-09-07 13:17:46,622] io.dropwizard.jersey.errors.LoggingExceptionMapper: Error handling a request: 1dbf8362bd76c20f
-! org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.Task#8]
+! org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [org.jana.dropwizard.core.TaskEntity#8]
 
 # ----------------------------------------------------------------------------------------------------------------------
 

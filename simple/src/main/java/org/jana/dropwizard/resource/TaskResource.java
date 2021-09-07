@@ -1,7 +1,7 @@
 package org.jana.dropwizard.resource;
 
 import io.dropwizard.hibernate.UnitOfWork;
-import org.jana.dropwizard.core.Task;
+import org.jana.dropwizard.core.TaskEntity;
 import org.jana.dropwizard.dao.TaskDao;
 
 import javax.ws.rs.*;
@@ -20,27 +20,23 @@ public class TaskResource {
 
     @GET
     @UnitOfWork
-    public List<Task> getAllTasks() {
+    public List<TaskEntity> getAllTasks() {
         return taskDao.findAll();
     }
 
     @GET
     @Path("/{id}")
     @UnitOfWork
-    public Task getById(@PathParam("id") int id) {
+    public TaskEntity getById(@PathParam("id") int id) {
         return taskDao
                 .findById(id)
                 .orElseThrow(RuntimeException::new);
     }
 
     @POST
-    @Path("/create")
-//    @Timed
-    @UnitOfWork // @Valid
-    public Task create() {
-        Task task = new Task(8, "desc8", "2021-01-08", "PENDING");
-        return taskDao.create(task);
-        // return saved;
+    @UnitOfWork
+    public int create(TaskEntity taskEntity) {
+        return taskDao.create(taskEntity).getId();
     }
 
 //    @POST

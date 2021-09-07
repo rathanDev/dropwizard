@@ -6,7 +6,7 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
-import org.jana.dropwizard.core.Task;
+import org.jana.dropwizard.core.TaskEntity;
 import org.jana.dropwizard.dao.TaskDao;
 import org.jana.dropwizard.resource.TaskResource;
 
@@ -40,7 +40,7 @@ public class IntroApp extends Application<SimpleConfig> {
         // env.healthChecks().register("application", new AppHealthCheck());
     }
 
-    HibernateBundle<SimpleConfig> hibernateBundle = new HibernateBundle<SimpleConfig>(Task.class) {
+    HibernateBundle<SimpleConfig> hibernateBundle = new HibernateBundle<SimpleConfig>(TaskEntity.class) {
         @Override
         public PooledDataSourceFactory getDataSourceFactory(SimpleConfig config) {
             return config.getDataSourceFactory();
