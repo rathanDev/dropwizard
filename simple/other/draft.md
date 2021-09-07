@@ -86,6 +86,8 @@ ERROR [2021-09-07 13:17:46,622] io.dropwizard.jersey.errors.LoggingExceptionMapp
 
 # ----------------------------------------------------------------------------------------------------------------------
 
+mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeArtifactId=java-simple -DarchetypeVersion=0.1.0
+
 
 
 # ----------------------------------------------------------------------------------------------------------------------

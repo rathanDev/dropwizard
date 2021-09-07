@@ -17,7 +17,6 @@ public class Task implements Serializable {
     private static final long serialVersionUID = -1798070786993154676L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 

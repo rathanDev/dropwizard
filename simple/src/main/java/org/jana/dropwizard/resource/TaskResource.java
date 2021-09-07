@@ -39,7 +39,7 @@ public class TaskResource {
     @UnitOfWork // @Valid
     public Task create() {
         Task task = new Task(8, "desc8", "2021-01-08", "PENDING");
-        return taskDao.saveOrUpdate(task);
+        return taskDao.create(task);
         // return saved;
     }
 
