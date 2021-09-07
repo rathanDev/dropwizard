@@ -34,6 +34,8 @@ public class TaskResource {
     }
 
     @POST
+    @Path("/create")
+//    @Timed
     @UnitOfWork // @Valid
     public Task create() {
         Task task = new Task(8, "desc8", "2021-01-08", "PENDING");
@@ -41,22 +43,22 @@ public class TaskResource {
         // return saved;
     }
 
-    @POST
-    @Path("/{id}")
-    @UnitOfWork
-    public Task update(@PathParam("id") int id, Task task) {
-        Task record = taskDao.findById(id).orElseThrow(RuntimeException::new);
-        if (task.getTaskDesc() != null && !task.getTaskDesc().isBlank()) {
-            record.setTaskDesc(task.getTaskDesc());
-        }
-        if (task.getTaskDate() != null && !task.getTaskDate().isBlank()) {
-            record.setTaskDate(task.getTaskDate());
-        }
-        if (task.getTaskStatus() != null && !task.getTaskStatus().isBlank()) {
-            record.setTaskStatus(task.getTaskStatus());
-        }
-        return taskDao.saveOrUpdate(record);
-    }
+//    @POST
+//    @Path("/{id}")
+//    @UnitOfWork
+//    public Task update(@PathParam("id") int id, Task task) {
+//        Task record = taskDao.findById(id).orElseThrow(RuntimeException::new);
+//        if (task.getTaskDesc() != null && !task.getTaskDesc().isEmpty()) {
+//            record.setTaskDesc(task.getTaskDesc());
+//        }
+//        if (task.getTaskDate() != null && !task.getTaskDate().isEmpty()) {
+//            record.setTaskDate(task.getTaskDate());
+//        }
+//        if (task.getTaskStatus() != null && !task.getTaskStatus().isEmpty()) {
+//            record.setTaskStatus(task.getTaskStatus());
+//        }
+//        return taskDao.saveOrUpdate(record);
+//    }
 
 }
 

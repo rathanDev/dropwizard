@@ -1,6 +1,7 @@
 package org.jana.dropwizard.core;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -11,23 +12,22 @@ import java.util.Objects;
                 query = "select t from Task t"
         )
 })
-public class Task {
+public class Task implements Serializable {
 
     private static final long serialVersionUID = -1798070786993154676L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // @Column(name = "task_id")
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
     @Column(name = "taskDesc", unique = false, nullable = true, length = 100)
     private String taskDesc;
 
-    @Column(name = "taskDate")
+    @Column(name = "taskDate", unique = false, nullable = true, length = 20)
     private String taskDate;
 
-    @Column(name = "taskStatus")
+    @Column(name = "taskStatus", unique = false, nullable = true, length = 20)
     private String taskStatus;
 
     public Task() {
@@ -84,15 +84,12 @@ public class Task {
 
         Task task = (Task) o;
 
-        return id == task.id &&
-                Objects.equals(taskDesc, task.taskDesc) &&
-                Objects.equals(taskDate, task.taskDate) &&
-                Objects.equals(taskStatus, task.taskStatus);
+        return id == task.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, taskDesc, taskDate, taskStatus);
+        return Objects.hash(id);
     }
 
 }
