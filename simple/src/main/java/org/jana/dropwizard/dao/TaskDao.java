@@ -17,7 +17,7 @@ public class TaskDao extends AbstractDAO<TaskEntity> {
         return list(namedTypedQuery("org.jana.dropwizard.core.TaskEntity.findAll"));
     }
 
-    public Optional<TaskEntity> findById(int id) {
+    public Optional<TaskEntity> findById(String id) {
         return Optional.ofNullable(get(id));
     }
 

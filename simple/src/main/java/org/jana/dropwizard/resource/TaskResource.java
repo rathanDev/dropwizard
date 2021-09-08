@@ -30,7 +30,7 @@ public class TaskResource {
     @GET
     @Path("/{id}")
     @UnitOfWork
-    public TaskEntity getById(@PathParam("id") int id) {
+    public TaskEntity getById(@PathParam("id") String id) {
         return taskDao
                 .findById(id)
                 .orElseThrow(RuntimeException::new);
@@ -51,7 +51,7 @@ public class TaskResource {
     @POST
     @Path("/{id}")
     @UnitOfWork
-    public String update(@PathParam("id") int id, TaskDomain req) {
+    public String update(@PathParam("id") String id, TaskDomain req) {
         TaskEntity entity = taskDao.findById(id).orElseThrow(RuntimeException::new);
         if (req.getTaskDesc() != null && !req.getTaskDesc().trim().isEmpty()) {
             entity.setTaskDesc(req.getTaskDesc());
