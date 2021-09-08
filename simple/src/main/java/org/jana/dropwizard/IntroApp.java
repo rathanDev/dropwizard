@@ -6,9 +6,10 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
-import org.jana.dropwizard.entity.TaskEntity;
 import org.jana.dropwizard.dao.TaskDao;
+import org.jana.dropwizard.entity.TaskEntity;
 import org.jana.dropwizard.resource.TaskResource;
+import org.jana.dropwizard.service.TaskService;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
@@ -34,7 +35,8 @@ public class IntroApp extends Application<SimpleConfig> {
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
         TaskDao taskDao = new TaskDao(hibernateBundle.getSessionFactory());
-        TaskResource taskResource = new TaskResource(taskDao);
+        TaskService taskService = new TaskService(taskDao);
+        TaskResource taskResource = new TaskResource(taskService);
         env.jersey().register(taskResource);
 
         // env.healthChecks().register("application", new AppHealthCheck());
