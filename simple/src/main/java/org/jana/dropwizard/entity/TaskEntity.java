@@ -68,5 +68,15 @@ public class TaskEntity {
         this.taskStatus = taskStatus;
     }
 
+    @Override
+    public String toString() {
+        return "TaskEntity{" +
+                "id='" + id + '\'' +
+                ", taskDesc='" + taskDesc + '\'' +
+                ", taskDate=" + taskDate +
+                ", taskStatus='" + taskStatus + '\'' +
+                '}';
+    }
+
 }
 
