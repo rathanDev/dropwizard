@@ -40,7 +40,7 @@ public class TaskResource {
     @PUT
     @Path("/{id}")
     @UnitOfWork
-    public String update(@PathParam("id") String id, TaskDomain req) {
+    public TaskDomain update(@PathParam("id") String id, TaskDomain req) {
         return taskService.update(id, req);
     }
 

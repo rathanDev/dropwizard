@@ -29,7 +29,6 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
-    //    @UnitOfWork
     public TaskDomain getById(String id) {
         log.debug("Get task by id:{}", id);
         Optional<TaskEntity> entityOpt = taskDao.findById(id);
@@ -40,7 +39,6 @@ public class TaskService {
         return new TaskDomain(entity.getId(), entity.getTaskDesc(), entity.getTaskDate(), TaskStatus.valueOf(entity.getTaskStatus()));
     }
 
-    //    @UnitOfWork
     public TaskDomain create(TaskDomain req) {
         log.debug("Create task: {}", req);
         TaskEntity entity = new TaskEntity(
@@ -49,14 +47,17 @@ public class TaskService {
                 req.getTaskDate(),
                 TaskStatus.PENDING.toString()
         );
-        taskDao.saveOrUpdate(entity);
-        return new TaskDomain(entity.getId(), entity.getTaskDesc(), entity.getTaskDate(), TaskStatus.valueOf(entity.getTaskStatus()));
+        TaskEntity savedRecord = taskDao.saveOrUpdate(entity);
+        return new TaskDomain(savedRecord.getId(), savedRecord.getTaskDesc(), savedRecord.getTaskDate(), TaskStatus.valueOf(savedRecord.getTaskStatus()));
     }
 
-    //    @UnitOfWork
-    public String update(String id, TaskDomain req) {
+    public TaskDomain update(String id, TaskDomain req) {
         log.debug("Update task id:{} req:{}", id, req);
-        TaskEntity entity = taskDao.findById(id).orElseThrow(RuntimeException::new);
+        Optional<TaskEntity> entityOpt = taskDao.findById(id);
+        if (!entityOpt.isPresent()) {
+            return new TaskDomain();
+        }
+        TaskEntity entity = entityOpt.get();
         if (req.getTaskDesc() != null && !req.getTaskDesc().trim().isEmpty()) {
             entity.setTaskDesc(req.getTaskDesc());
         }
@@ -66,8 +67,8 @@ public class TaskService {
         if (req.getTaskStatus() != null) {
             entity.setTaskStatus(req.getTaskStatus().toString());
         }
-        taskDao.saveOrUpdate(entity);
-        return entity.getId();
+        TaskEntity updatedRecord = taskDao.saveOrUpdate(entity);
+        return new TaskDomain(updatedRecord.getId(), updatedRecord.getTaskDesc(), updatedRecord.getTaskDate(), TaskStatus.valueOf(updatedRecord.getTaskStatus()));
     }
 
 }
