@@ -12,7 +12,8 @@ public class TaskDomain {
     public TaskDomain() {
     }
 
-    public TaskDomain(String taskDesc, Date taskDate, TaskStatus taskStatus) {
+    public TaskDomain(String id, String taskDesc, Date taskDate, TaskStatus taskStatus) {
+        this.id = id;
         this.taskDesc = taskDesc;
         this.taskDate = taskDate;
         this.taskStatus = taskStatus;
