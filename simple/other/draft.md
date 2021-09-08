@@ -91,4 +91,30 @@ mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeAr
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+# TODO 
+
+* Clone from a git repo in Dockerfile
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+
+* Add workdir 
+FROM openjdk:16-alpine3.13
+WORKDIR /app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
+COPY src ./src
+CMD ["./mvnw", "spring-boot:run"]
+
+* Run app as a non-root user
+Refer  https://spring.io/guides/gs/spring-boot-docker/
+  FROM openjdk:8-jdk-alpine
+  RUN addgroup -S spring && adduser -S spring -G spring
+  USER spring:spring
+  ARG JAR_FILE=target/*.jar
+  COPY ${JAR_FILE} app.jar
+  ENTRYPOINT ["java","-jar","/app.jar"]
+
+
+
 # ----------------------------------------------------------------------------------------------------------------------
